@@ -6,7 +6,62 @@ from exercices import add_substr, mult_div, dot_product, determinant, inverse, t
 import numpy as np
 from ast import literal_eval
 
-app_running = True
+# ----------------------------------------------------------------------------------------------------------
+
+def running_ex(help_text):
+    """
+    Fonction s'occupant de faire tourner un exercice. Vérifiaction des commandes, réponses justes ou non,
+    autre essai pour la réponse, retour au menu des exercices.
+    :param help_text: Texte d'aide pour l'exercice en particulier.
+    :return: False, renvoyé quand on introduit stop, quand veut quitter l'exercice et renvenir au menu
+    """
+    try_ex = True
+    while try_ex:
+
+        awnser = input(str(exercice))
+
+        if awnser in ['help', 'stop']:
+            if awnser == 'help':
+                print(help_text)
+            elif awnser == 'stop':
+                print("Arrêt de l'exercice")
+                exercice_running = False  # On ne fait plus tourner la boucle de l'exercice
+                return(exercice_running)
+
+        else:
+            try:
+                literal_eval(awnser)
+            except ValueError:
+                # si une erreur est générée par la transformation en numpy.ndarray de la réponse:
+                print("Erreur! Veuillez insérer help stop ou la réponse sous le bon format (voir 'help').")
+                continue
+            except SyntaxError:
+                # si une erreur est générée par la transformation en numpy.ndarray de la réponse:
+                print("Erreur! Aucune réponse insérée")
+                continue
+
+            if exercice.check_result(
+                    literal_eval(awnser)):  # literal_eval() -> transforme un string ressemblant à un tableau en tableau
+                print("Correct \n")
+                try_ex = False
+
+            else:
+                print("Incorrect.\n")
+                test_retry = True
+                while test_retry:  # Boucle pour demander si on veut réessayer en cas d'erreur
+                    retry = input("Voulez-vous réessayer ? (oui/non) \n")
+                    if retry == "non":
+                        test_retry = False
+                        try_ex = False
+                        print("\nDommage.... Essayons un autre exercice")
+                    elif retry == "oui":
+                        test_retry = False
+                        # try_ex = True  # On laisse la boucle pour réessayer l'exercice
+                    else:
+                        print("Répondez oui ou non seulement")
+
+#-------------------------------------------------------------------------------------------------------------------------
+app_running = True  # l'app tourne de base
 
 while app_running:
     print("\n----------------------------------------------------------------------------------------------------------------------------------")
@@ -20,11 +75,10 @@ while app_running:
           "     6.Calculs de matrices transposées\n\n")
     ex_num = int(input("Indiquez le numéro correspondant: "))
 
-    # dict_num_to_ex = {1: }
-
+#-------------------------------------------------------------------------------------------------------------------------
     if ex_num == 1:
-        help_text = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
-                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice."
+        help_text_1 = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
+                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
         exercice_running = True
         while exercice_running:
             dim_x = np.random.randint(1, 4)
@@ -35,45 +89,38 @@ while app_running:
             matrix1.get_random_values(-5, 5)
             matrix2.get_random_values(-5, 5)
 
-            ex_num = np.random.randint(0, 2)  # détermine si on fera une addition ou une soustraction au hasard -> vérifier
+            ex_num = np.random.randint(0, 2)  # détermine si on fera une addition ou une soustraction au hasard
 
             exercice = add_substr.ExerciceAddSubstr(matrix1, matrix2, ex_num)
 
-            try_ex = True
-            while try_ex:
-                awnser = input(str(exercice))
-
-                if awnser in ['help', 'stop']:
-                    if awnser == 'help':
-                        print(help_text)
-                    elif awnser == 'stop':
-                        print("Arrêt de l'exercice")
-                        exercice_running = False # On ne fait plus tourner la boucle de l'exercice
-                        break
-
-                elif exercice.check_result(literal_eval(awnser)):   # literal_eval() -> transforme un string ressemblant à un tableau en tableau
-                    print("Correct")
-                    try_ex = False
-
-                else:
-                    print("Incorrect.\n")
-                    test_retry = True
-                    while test_retry:  # Boucle pour demander si on veut réessayer en cas d'erreur
-                        retry = input("Voulez-vous réessayer ? (oui/non) \n")
-                        if retry == "non":
-                            test_retry = False
-                            try_ex = False
-                        elif retry == "oui":
-                            test_retry = False
-                            #try_ex = True  # On laisse la boucle pour réessayer l'exercice
-                        else:
-                            print("Répondez oui ou non seulement")
+            if running_ex(help_text_1) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+                break
 
 
+#-------------------------------------------------------------------------------------------------------------------------
+    if ex_num == 2:
+        help_text_2 = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
+                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
+        exercice_running = True
+        while exercice_running:
+            dim_x = np.random.randint(1, 4)
+            dim_y = np.random.randint(1, 4)
 
-            #exercice_running = False
-    app_running = False
+            matrix = exercices.matrix.Matrix(dim_x, dim_y)
+            matrix.get_random_values(-5, 5)
+            factor = np.random.randint(1, 5)
+
+            ex_num = np.random.randint(0, 2)  # détermine si on fera une multiplication ou une division au hasard
+
+            exercice = mult_div.ExerciceMultDiv(matrix, factor, ex_num)
+
+            if running_ex(help_text_2) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+                break
+
+            #exercice_running = False  # Enlever plus tard
+
+    app_running = False # Enlever plus tard
 
 if __name__ == "__main__":
-    print("salut")
+    print("Fin")
 

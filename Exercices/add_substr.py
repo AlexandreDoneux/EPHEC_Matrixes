@@ -1,28 +1,8 @@
 # Alexandre Doneux
 # Python 3.10
 
-from exercices.matrix import Matrix
+from exercices.matrix import Matrix  # techniquement je n'utilise pas la classe Matrix. J'utilise des objets mais pas besoin d'import
 import numpy as np
-
-exercice_running = True
-#dict_level_number = {1: [], 2: [], 3: []}
-
-while exercice_running:
-    dim_x = np.random.randint(1, 3)
-    dim_y = np.random.randint(1, 3)
-    matrix1 = Matrix(dim_x, dim_y)
-    matrix2 = Matrix(dim_x, dim_y)
-
-    # Générer nombre pour savoir si addition ou soustraction
-    ex_num = np.random.randint(1, 3)
-
-    if ex_num == 1:
-        print("Quel est la somme ...")
-
-    if ex_num == 2:
-        print("Quel est la soustraction de ...")
-
-    exercice_running = False
 
 class ExerciceAddSubstr:
     def __init__(self, matrix1, matrix2, type_ex):
