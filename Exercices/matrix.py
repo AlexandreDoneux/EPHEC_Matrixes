@@ -62,7 +62,7 @@ class Matrix:
         if np.linalg.det(self.values) != 0:
             self.inverted = np.around(np.linalg.inv(self.values), 2)  # numpy.around() -> arrondit les valeurs
         else:
-            self.inverted = False  # Mets la-'inverse à False
+            self.inverted = False  # Mets l'attribut 'inverse' à False
 
     def transpose(self):
         """

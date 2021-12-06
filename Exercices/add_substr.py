@@ -10,7 +10,7 @@ class ExerciceAddSubstr:
         initialisation des attributs de la classe et calculera la somme et la différence des deux matrices
         :param matrix1: Première matrice pour l'addition ou soustraction
         :param matrix2: Deuxième matrice pour l'addition ou soustraction
-        :param: type: int, si égal à 0, on fait une addition, si égale à 1 une soustraction
+        :param: type_ex: int, si égal à 0, on fait une addition, si égale à 1 une soustraction
         """
         self.matrix1 = matrix1
         self.matrix2 = matrix2
@@ -26,7 +26,7 @@ class ExerciceAddSubstr:
 
     def __str__(self):
         self.text = "".join(("Soit les matrices A et B suivantes: \n\n", str(self.matrix1), "\n\n", str(self.matrix2),
-                             "\n\nDonnez", self.ex_name[self.type_ex], "\n "))
+                             "\n\nDonnez", self.ex_name[self.type_ex], "\n: "))
         return(self.text)
 
     def check_result(self, awnser):
@@ -35,7 +35,10 @@ class ExerciceAddSubstr:
         :param awnser: solution fournie par l'utilisateur, on utilisera un input dans main_matrix.py
         :return: result - boolean, si  la réponse est bonne renvoie True, sinon renvoie False
         """
-        result = np.array_equal(self.result, awnser)
+        # result = np.array_equal(self.result, awnser)
+        result = np.allclose(self.result,
+                             awnser)  # vérifie si égale avec une certaine précision (les valeurs de tolérance de base sont OK
+        # Dans certains calculs de numpy on a pas le nombre exacte, exemple: 3 != 3.0000000000004
         return(result)
 
 

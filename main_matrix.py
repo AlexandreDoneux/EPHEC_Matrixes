@@ -49,7 +49,7 @@ def running_ex(help_text):
                 print("Incorrect.\n")
                 test_retry = True
                 while test_retry:  # Boucle pour demander si on veut réessayer en cas d'erreur
-                    retry = input("Voulez-vous réessayer ? (oui/non) \n")
+                    retry = input("Voulez-vous réessayer ? (oui/non) \n: ")
                     if retry == "non":
                         test_retry = False
                         try_ex = False
@@ -117,7 +117,42 @@ while app_running:
             if running_ex(help_text_2) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
                 break
 
-            #exercice_running = False  # Enlever plus tard
+#-------------------------------------------------------------------------------------------------------------------------
+    if ex_num == 3:
+        help_text_3 = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
+                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
+        exercice_running = True
+        while exercice_running:
+            dim_x = np.random.randint(1, 4)
+            dim_y = np.random.randint(1, 4)  # dimension y de la première matrice et dimension x de la deuxième
+            dim_y2 = np.random.randint(1, 4)
+
+            matrix1 = exercices.matrix.Matrix(dim_x, dim_y)
+            matrix2 = exercices.matrix.Matrix(dim_y, dim_y2)
+            matrix1.get_random_values(-5, 5)
+            matrix2.get_random_values(-5, 5)
+
+            exercice = dot_product.DotProduct(matrix1, matrix2)
+
+            if running_ex(help_text_3) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+                break
+
+#-------------------------------------------------------------------------------------------------------------------------
+    if ex_num == 4:
+        help_text_4 = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
+                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
+        exercice_running = True
+        while exercice_running:
+            dim = np.random.randint(1, 4)
+
+            matrix = exercices.matrix.Matrix(dim, dim)
+            matrix.get_random_values(-5, 5)
+
+            exercice = determinant.Deter(matrix)
+
+            if running_ex(help_text_4) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+                break
+
 
     app_running = False # Enlever plus tard
 
