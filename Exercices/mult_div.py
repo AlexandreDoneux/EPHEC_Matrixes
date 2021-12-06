@@ -27,7 +27,8 @@ class ExerciceMultDiv:
 
     def __str__(self):
         self.text = "".join(("Soit la matrices A et le nombre b: \n\n", str(self.matrix), "\n\n", str(self.factor),
-                             "\n\nDonnez", self.ex_name[self.type_ex], "\n: "))
+                             "\n\nDonnez", self.ex_name[self.type_ex], "\n"
+                             "Attention! arrondir les valeurs au millième près. Arrondi vers le haut à 5.\n: "))
         return(self.text)
 
     def check_result(self, awnser):

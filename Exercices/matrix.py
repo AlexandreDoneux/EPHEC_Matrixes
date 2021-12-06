@@ -60,7 +60,7 @@ class Matrix:
         Mets dans l'attrribut "inverted" de l'objet l'inverse de la matrice(sous la forme d'un numpy.ndarray.
         """
         if np.linalg.det(self.values) != 0:
-            self.inverted = np.around(np.linalg.inv(self.values), 2)  # numpy.around() -> arrondit les valeurs
+            self.inverted = np.around(np.linalg.inv(self.values), 3)  # numpy.around() -> arrondit les valeurs
         else:
             self.inverted = False  # Mets l'attribut 'inverse' à False
 

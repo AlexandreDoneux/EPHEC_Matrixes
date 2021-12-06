@@ -18,7 +18,8 @@ class DotProduct:
 
     def __str__(self):
         self.text = "".join(("Soit les matrices A et B suivantes: \n\n", str(self.matrix1), "\n\n", str(self.matrix2),
-                             "\n\nDonnez le produit matriciel AxB\n: "))
+                             "\n\nDonnez le produit matriciel AxB\n"
+                             "Attention! arrondir les valeurs au millième près. Arrondi vers le haut à 5.\n: "))
         return(self.text)
 
     def check_result(self, awnser):

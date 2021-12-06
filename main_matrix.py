@@ -60,6 +60,13 @@ def running_ex(help_text):
                     else:
                         print("Répondez oui ou non seulement")
 
+help_text = "\nLorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
+            "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
+help_text_123 = "Besoins d'infos sur la question ?  https://www.alloprof.qc.ca/fr/eleves/bv/mathematiques/les-operations-sur-les-matrices-m1467  \n"
+help_text_4 = "Besoins d'infos sur la question ? https://www.methodemaths.fr/determinant_matrice/  \n"
+help_text_5 = "Besoins d'infos sur la question ? https://homeomath2.imingo.net/invmat.htm  \n"
+help_text_6 = "Besoins d'infos sur la question ? https://uel.unisciel.fr/mathematiques/calculmat1/calculmat1_ch01/co/apprendre_ch1_01_11.html  \n"
+
 #-------------------------------------------------------------------------------------------------------------------------
 app_running = True  # l'app tourne de base
 
@@ -73,12 +80,23 @@ while app_running:
           "     4.Calcul de déterminants\n"
           "     5.Calculs de matrices inverses\n"
           "     6.Calculs de matrices transposées\n\n")
-    ex_num = int(input("Indiquez le numéro correspondant: "))
+    ex_num = input("Indiquez le numéro correspondant: ")
 
 #-------------------------------------------------------------------------------------------------------------------------
-    if ex_num == 1:
-        help_text_1 = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
-                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
+    try:
+        int(ex_num)
+    except ValueError:   #Test si ex_num peut être transformé en nombre. Si non -> 'stop' ou erreur
+        if ex_num == "stop":
+            print("Arrêt de l'application'")
+            break
+        else:
+            print("Erreur! Tapez un numéro d'exercice ou 'stop pour arreter l'application.")
+            continue
+
+#-------------------------------------------------------------
+
+    if int(ex_num) == 1:
+
         exercice_running = True
         while exercice_running:
             dim_x = np.random.randint(1, 4)
@@ -93,14 +111,13 @@ while app_running:
 
             exercice = add_substr.ExerciceAddSubstr(matrix1, matrix2, ex_num)
 
-            if running_ex(help_text_1) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            if running_ex(help_text+ help_text_123) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
                 break
 
 
 #-------------------------------------------------------------------------------------------------------------------------
-    if ex_num == 2:
-        help_text_2 = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
-                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
+    elif int(ex_num) == 2:
+
         exercice_running = True
         while exercice_running:
             dim_x = np.random.randint(1, 4)
@@ -114,13 +131,12 @@ while app_running:
 
             exercice = mult_div.ExerciceMultDiv(matrix, factor, ex_num)
 
-            if running_ex(help_text_2) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            if running_ex(help_text+ help_text_123) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
                 break
 
 #-------------------------------------------------------------------------------------------------------------------------
-    if ex_num == 3:
-        help_text_3 = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
-                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
+    elif int(ex_num) == 3:
+
         exercice_running = True
         while exercice_running:
             dim_x = np.random.randint(1, 4)
@@ -134,13 +150,12 @@ while app_running:
 
             exercice = dot_product.DotProduct(matrix1, matrix2)
 
-            if running_ex(help_text_3) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            if running_ex(help_text+ help_text_123) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
                 break
 
 #-------------------------------------------------------------------------------------------------------------------------
-    if ex_num == 4:
-        help_text_4 = "Lorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
-                    "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
+    elif int(ex_num) == 4:
+
         exercice_running = True
         while exercice_running:
             dim = np.random.randint(1, 4)
@@ -150,12 +165,46 @@ while app_running:
 
             exercice = determinant.Deter(matrix)
 
-            if running_ex(help_text_4) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            if running_ex(help_text+ help_text_4) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
                 break
 
+#-------------------------------------------------------------------------------------------------------------------------
+    elif int(ex_num) == 5:
 
-    app_running = False # Enlever plus tard
+        exercice_running = True
+        while exercice_running:
+            dim = np.random.randint(1, 4) # Une matrice à une inverse que si elle est carrée
+                                            # et que son déterminant est nul (voir inverse.py
+
+            matrix = exercices.matrix.Matrix(dim, dim)
+            matrix.get_random_values(-5, 5)
+
+            exercice = inverse.Inverse(matrix)
+
+            if running_ex(help_text+ help_text_5) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+                break
+
+#-------------------------------------------------------------------------------------------------------------------------
+    elif int(ex_num) == 6:
+
+        exercice_running = True
+        while exercice_running:
+            dim_x = np.random.randint(1, 4)
+            dim_y = np.random.randint(1, 4)
+
+            matrix = exercices.matrix.Matrix(dim_x, dim_y)
+            matrix.get_random_values(-5, 5)
+
+            exercice = transpose.Transpos(matrix)
+
+            if running_ex(help_text+ help_text_6) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+                break
+
+#---------------------------------------
+    else:
+        print("Erreur! Cet exercice n'existe pas.")
+
 
 if __name__ == "__main__":
-    print("Fin")
+    pass
 
