@@ -64,3 +64,11 @@ if __name__ == "__main__":
 
     if np.array_equal(np.ones((3,3)), [[1, 1, 1], [1, 1, 1], [1, 1, 1]]):
         print("marche")
+
+    result = np.array_equal(np.ones((2, 2)), [[1, 1], [1, 1]])
+    print(result)
+
+    matrix3 = [[1, 2], [3, 4]]
+    print(matrix3)
+    print(np.array(matrix3))
+    print(np.array_equal(matrix3, np.array(matrix3)))

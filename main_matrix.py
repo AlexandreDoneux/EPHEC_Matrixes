@@ -4,6 +4,7 @@
 import exercices.matrix
 from exercices import add_substr, mult_div, dot_product, determinant, inverse, transpose
 import numpy as np
+from ast import literal_eval
 
 app_running = True
 
@@ -26,8 +27,8 @@ while app_running:
                     "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice."
         exercice_running = True
         while exercice_running:
-            dim_x = ex_num = np.random.randint(1, 4)
-            dim_y= ex_num = np.random.randint(1, 4)
+            dim_x = np.random.randint(1, 4)
+            dim_y = np.random.randint(1, 4)
 
             matrix1 = exercices.matrix.Matrix(dim_x, dim_y)
             matrix2 = exercices.matrix.Matrix(dim_x, dim_y)
@@ -38,19 +39,41 @@ while app_running:
 
             exercice = add_substr.ExerciceAddSubstr(matrix1, matrix2, ex_num)
 
-            awnser = input(str(exercice))
-            if awnser in ['help', 'stop']:
-                if awnser == 'help':
-                    print(help_text)
-                elif awnser == 'stop':
-                    print("Arrêt de l'exercice")
-                    break
+            try_ex = True
+            while try_ex:
+                awnser = input(str(exercice))
 
-            if exercice.check_result(awnser) == True:   # vérifier que le mode d'écriture de l'utilisateur est ok pour la comparaison des matrices
-                print("Correct")
-            else:
-                print("Incorrect. Vous avez une seconde chance: \n")
-                #awnser = input(str(exercice))
+                if awnser in ['help', 'stop']:
+                    if awnser == 'help':
+                        print(help_text)
+                    elif awnser == 'stop':
+                        print("Arrêt de l'exercice")
+                        exercice_running = False # On ne fait plus tourner la boucle de l'exercice
+                        break
 
-            exercice_running = False
+                elif exercice.check_result(literal_eval(awnser)):   # literal_eval() -> transforme un string ressemblant à un tableau en tableau
+                    print("Correct")
+                    try_ex = False
+
+                else:
+                    print("Incorrect.\n")
+                    test_retry = True
+                    while test_retry:  # Boucle pour demander si on veut réessayer en cas d'erreur
+                        retry = input("Voulez-vous réessayer ? (oui/non) \n")
+                        if retry == "non":
+                            test_retry = False
+                            try_ex = False
+                        elif retry == "oui":
+                            test_retry = False
+                            #try_ex = True  # On laisse la boucle pour réessayer l'exercice
+                        else:
+                            print("Répondez oui ou non seulement")
+
+
+
+            #exercice_running = False
     app_running = False
+
+if __name__ == "__main__":
+    print("salut")
+
