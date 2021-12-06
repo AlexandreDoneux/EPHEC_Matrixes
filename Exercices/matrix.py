@@ -107,8 +107,14 @@ class Matrix:
         self.values = np.random.randint(low, high, (self.dim_x, self.dim_y))
 
 if __name__ == "__main__":
+    dim_x = ex_num = np.random.randint(1, 4)
+    dim_y = ex_num = np.random.randint(1, 4)
 
-    matr1 = Matrix(3,3)
-    matr1.get_random_values(2, 7)
-    print(matr1)
-    print(matr1*2)
+    matrix1 = Matrix(dim_x, dim_y)
+    matrix2 = Matrix(dim_x, dim_y)
+    matrix1.get_random_values(0, 5)
+    matrix2.get_random_values(0, 5)
+
+    print(matrix1)
+    print(matrix2)
+
