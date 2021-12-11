@@ -53,7 +53,7 @@ def running_ex(help_text):
                     if retry == "non":
                         test_retry = False
                         try_ex = False
-                        print("\nDommage.... Essayons un autre exercice")
+                        print("\nDommage....La réponse était: \n{0}\nEssayons un autre exercice\n".format(exercice.result  ))
                     elif retry == "oui":
                         test_retry = False
                         # try_ex = True  # On laisse la boucle pour réessayer l'exercice
@@ -87,7 +87,7 @@ while app_running:
         int(ex_num)
     except ValueError:   #Test si ex_num peut être transformé en nombre. Si non -> 'stop' ou erreur
         if ex_num == "stop":
-            print("Arrêt de l'application'")
+            print("Arrêt de l'application. A la prochaine fois")
             break
         else:
             print("Erreur! Tapez un numéro d'exercice ou 'stop pour arreter l'application.")
