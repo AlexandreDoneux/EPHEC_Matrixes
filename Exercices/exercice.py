@@ -5,8 +5,8 @@
 import numpy as np
 
 class Exercice:
-    def __init__(self):
-        self.result
+    """def __init__(self):
+        self.result"""
 
     def check_result(self, awnser):
         """

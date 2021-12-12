@@ -8,6 +8,7 @@ from ast import literal_eval
 
 # ----------------------------------------------------------------------------------------------------------
 
+
 def running_ex(help_text):
     """
     Fonction s'occupant de faire tourner un exercice. Vérifiaction des commandes, réponses justes ou non,
@@ -26,7 +27,7 @@ def running_ex(help_text):
             elif awnser == 'stop':
                 print("Arrêt de l'exercice")
                 exercice_running = False  # On ne fait plus tourner la boucle de l'exercice
-                return(exercice_running)
+                return exercice_running
 
         else:
             try:
@@ -53,26 +54,32 @@ def running_ex(help_text):
                     if retry == "non":
                         test_retry = False
                         try_ex = False
-                        print("\nDommage....La réponse était: \n{0}\nEssayons un autre exercice\n".format(exercice.result  ))
+                        print("\nDommage....La réponse était: \n{0}\nEssayons un autre exercice\n"
+                              .format(exercice.result))
                     elif retry == "oui":
                         test_retry = False
                         # try_ex = True  # On laisse la boucle pour réessayer l'exercice
                     else:
                         print("Répondez oui ou non seulement")
 
+
 help_text = "\nLorsque la réponse est sous la forme d'une matrice vous devez l'écrire sous une forme " \
             "d'imbrications de crochets. Par exemple: [[1,2],[3,4]]\nTappez 'stop' pour sortir de l'exercice.\n"
-help_text_123 = "Besoins d'infos sur la question ?  https://www.alloprof.qc.ca/fr/eleves/bv/mathematiques/les-operations-sur-les-matrices-m1467  \n"
+help_text_123 = "Besoins d'infos sur la question ?  https://www.alloprof.qc.ca/fr/eleves/bv/mathematiques/les-opera" \
+                "tions-sur-les-matrices-m1467  \n"
 help_text_4 = "Besoins d'infos sur la question ? https://www.methodemaths.fr/determinant_matrice/  \n"
 help_text_5 = "Besoins d'infos sur la question ? https://homeomath2.imingo.net/invmat.htm  \n"
-help_text_6 = "Besoins d'infos sur la question ? https://uel.unisciel.fr/mathematiques/calculmat1/calculmat1_ch01/co/apprendre_ch1_01_11.html  \n"
+help_text_6 = "Besoins d'infos sur la question ? https://uel.unisciel.fr/mathematiques/calculmat1/calculmat1_ch01/co/" \
+              "apprendre_ch1_01_11.html  \n"
 
-#-------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
 app_running = True  # l'app tourne de base
 
 while app_running:
-    print("\n----------------------------------------------------------------------------------------------------------------------------------")
-    print("Bienvenue dans cette application d'exercices sur les matrices. Tapez 'help' à tout moment pour obtenir de l'aide.\n")
+    print("\n----------------------------------------------------------------------------------------------------------"
+          "------------------------")
+    print("Bienvenue dans cette application d'exercices sur les matrices. Tapez 'help' à tout moment pour obtenir de "
+          "l'aide et stop pour quitter.\n")
     print("Quel type d'exercice voulez vous faire? \n"
           "     1.Additions et soustractions\n"
           "     2.Multiplications et divisions\n"
@@ -82,10 +89,10 @@ while app_running:
           "     6.Calculs de matrices transposées\n\n")
     ex_num = input("Indiquez le numéro correspondant: ")
 
-#-------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
     try:
         int(ex_num)
-    except ValueError:   #Test si ex_num peut être transformé en nombre. Si non -> 'stop' ou erreur
+    except ValueError:   # Test si ex_num peut être transformé en nombre. Si non -> 'stop' ou erreur
         if ex_num == "stop":
             print("Arrêt de l'application. A la prochaine fois")
             break
@@ -93,14 +100,14 @@ while app_running:
             print("Erreur! Tapez un numéro d'exercice ou 'stop pour arreter l'application.")
             continue
 
-#-------------------------------------------------------------
+# -------------------------------------------------------------
 
     if int(ex_num) == 1:
 
         exercice_running = True
         while exercice_running:
-            dim_x = np.random.randint(1, 4)
-            dim_y = np.random.randint(1, 4)
+            dim_x, dim_y = np.random.randint(1, 4)
+            # dim_y = np.random.randint(1, 4)
 
             matrix1 = exercices.matrix.Matrix(dim_x, dim_y)
             matrix2 = exercices.matrix.Matrix(dim_x, dim_y)
@@ -111,11 +118,13 @@ while app_running:
 
             exercice = add_substr.ExerciceAddSubstr(matrix1, matrix2, ex_num)
 
-            if running_ex(help_text+ help_text_123) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            # En sortant de la fonction si on indique que l'exercice ne tourne plus, on break pour revenir au menu de
+            # choix d'exercices
+            if running_ex(help_text + help_text_123) is False:
                 break
 
 
-#-------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
     elif int(ex_num) == 2:
 
         exercice_running = True
@@ -131,10 +140,12 @@ while app_running:
 
             exercice = mult_div.ExerciceMultDiv(matrix, factor, ex_num)
 
-            if running_ex(help_text+ help_text_123) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            # En sortant de la fonction si on indique que l'exercice ne tourne plus on, break pour revenir au menu de
+            # choix d'exercices
+            if running_ex(help_text + help_text_123) is False:
                 break
 
-#-------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
     elif int(ex_num) == 3:
 
         exercice_running = True
@@ -150,10 +161,10 @@ while app_running:
 
             exercice = dot_product.DotProduct(matrix1, matrix2)
 
-            if running_ex(help_text+ help_text_123) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            if running_ex(help_text + help_text_123) is False:
                 break
 
-#-------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
     elif int(ex_num) == 4:
 
         exercice_running = True
@@ -165,26 +176,26 @@ while app_running:
 
             exercice = determinant.Deter(matrix)
 
-            if running_ex(help_text+ help_text_4) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            if running_ex(help_text + help_text_4) is False:
                 break
 
-#-------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
     elif int(ex_num) == 5:
 
         exercice_running = True
+        # Une matrice à une inverse que si elle est carrée et que son déterminant est nul (voir inverse.py)
         while exercice_running:
-            dim = np.random.randint(1, 4) # Une matrice à une inverse que si elle est carrée
-                                            # et que son déterminant est nul (voir inverse.py
+            dim = np.random.randint(1, 4)
 
             matrix = exercices.matrix.Matrix(dim, dim)
             matrix.get_random_values(-5, 5)
 
             exercice = inverse.Inverse(matrix)
 
-            if running_ex(help_text+ help_text_5) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            if running_ex(help_text + help_text_5) is False:
                 break
 
-#-------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
     elif int(ex_num) == 6:
 
         exercice_running = True
@@ -197,10 +208,10 @@ while app_running:
 
             exercice = transpose.Transpos(matrix)
 
-            if running_ex(help_text+ help_text_6) == False:  # En sortant de la fonction si on indique que l'exercice ne tourne plus on break pour revenir au menu de choix d'exercices
+            if running_ex(help_text + help_text_6) is False:
                 break
 
-#---------------------------------------
+# ---------------------------------------
     else:
         print("Erreur! Cet exercice n'existe pas.")
 

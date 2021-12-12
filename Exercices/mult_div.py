@@ -1,7 +1,6 @@
 # Alexandre Doneux
 # Python 3.10
 
-from exercices.matrix import Matrix # techniquement je n'utilise pas la classe Matrix. J'utilise des objets mais pas besoin d'import
 from exercices.exercice import Exercice
 
 
@@ -29,9 +28,7 @@ class ExerciceMultDiv(Exercice):
         self.text = "".join(("Soit la matrices A et le nombre b: \n\n", str(self.matrix), "\n\n", str(self.factor),
                              "\n\nDonnez", self.ex_name[self.type_ex], "\n"
                              "Attention! arrondir les valeurs au millième près. Arrondi vers le haut à 5.\n: "))
-        return(self.text)
-
-
+        return self.text
 
 
 if __name__ == "__main__":

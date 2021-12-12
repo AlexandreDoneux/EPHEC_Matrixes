@@ -4,6 +4,7 @@
 
 import numpy as np
 
+
 class Matrix:
     def __init__(self, dim_x, dim_y):
         self.dim_x = dim_x
@@ -14,8 +15,7 @@ class Matrix:
         self.values = np.ones((dim_x, dim_y))   # .ones(utilise un tuple pour avoir les dimensions de la matrice
 
     def __str__(self):
-        return(str(self.values))  # Transformation en string car self. values est de type numpy.ndarray
-
+        return str(self.values)  # Transformation en string car self. values est de type numpy.ndarray
 
     def __add__(self, matrix2):
         """
@@ -23,8 +23,8 @@ class Matrix:
         :param matrix2: Objet de type Matrix
         :return: result - numpy.ndarray, représente la somme des matrices
         """
-        result = np.add( self.values, matrix2.values)
-        return(result)
+        result = np.add(self.values, matrix2.values)
+        return result
 
     def __sub__(self, matrix2):
         """
@@ -32,8 +32,8 @@ class Matrix:
         :param matrix2: Objet de type Matrix
         :return: result - numpy.ndarray, représente la différence des matrices
         """
-        result = np.subtract( self.values, matrix2.values)
-        return(result)
+        result = np.subtract(self.values, matrix2.values)
+        return result
 
     def __mul__(self, mult_factor):
         """
@@ -42,7 +42,7 @@ class Matrix:
         :return: result - numpy.ndarray, matrice finale suite à la mutiplication de ses valeurs
         """
         result = np.multiply(self.values, mult_factor)
-        return(result)
+        return result
 
     def __truediv__(self, div_factor):
         """
@@ -51,6 +51,7 @@ class Matrix:
         :return: result - numpy.ndarray, matrice finale suite à la division de ses valeurs
         """
         result = np.true_divide(self.values, div_factor)
+        return result
 
     def inverse(self):
         """
@@ -73,7 +74,6 @@ class Matrix:
         """
         self.transposed = np.transpose(self.values)
 
-
     def dot_product(self, matrix2):
         """
         Produit matriciel entre deux matrices. Le dim_y de la première doit être égale à dim_x de la deuxième
@@ -81,10 +81,10 @@ class Matrix:
         :return: result - umpy.ndarray, solution du produit matriciel
         """
         if self.dim_y != matrix2.dim_x:
-            return(False)   # si produit matriciel pas possible à cause des dimensions -> renvoit False
+            return False   # si produit matriciel pas possible à cause des dimensions -> renvoit False
 
         result = np.dot(self.values, matrix2.values)
-        return(result)
+        return result
 
     def get_determinant(self):
         """
@@ -106,6 +106,6 @@ class Matrix:
         """
         self.values = np.random.randint(low, high, (self.dim_x, self.dim_y))
 
+
 if __name__ == "__main__":
     pass
-
