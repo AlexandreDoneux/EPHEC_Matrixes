@@ -106,8 +106,8 @@ while app_running:
 
         exercice_running = True
         while exercice_running:
-            dim_x, dim_y = np.random.randint(1, 4)
-            # dim_y = np.random.randint(1, 4)
+            dim_x = np.random.randint(1, 4)
+            dim_y = np.random.randint(1, 4)
 
             matrix1 = exercices.matrix.Matrix(dim_x, dim_y)
             matrix2 = exercices.matrix.Matrix(dim_x, dim_y)
