@@ -21,5 +21,6 @@ class Exercice:
         # Dans certains calculs de numpy on a pas le nombre exacte, exemple: 3 != 3.0000000000004
         return (result)
 
+
 if __name__ == "__main__":
     pass

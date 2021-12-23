@@ -5,6 +5,9 @@
 import numpy as np
 
 
+class DivisionByZero(Exception):
+    pass
+
 class Matrix:
     def __init__(self, dim_x, dim_y):
         self.dim_x = dim_x
@@ -50,6 +53,8 @@ class Matrix:
         :param div_factor: int - nombre par lequel on va diviser toutes les valeurs de la matrice
         :return: result - numpy.ndarray, matrice finale suite à la division de ses valeurs
         """
+        if div_factor == 0:
+            raise DivisionByZero
         result = np.true_divide(self.values, div_factor)
         return result
 
@@ -60,10 +65,14 @@ class Matrix:
         :return: None
         Mets dans l'attrribut "inverted" de l'objet l'inverse de la matrice(sous la forme d'un numpy.ndarray.
         """
-        if np.linalg.det(self.values) != 0:
+        if self.dim_x != self.dim_y:
+            self.inverted = False    # Pas possible d'avoir une inverse car matrice pas carrée
+        elif np.linalg.det(self.values) != 0:
             self.inverted = np.around(np.linalg.inv(self.values), 3)  # numpy.around() -> arrondit les valeurs
         else:
             self.inverted = False  # Mets l'attribut 'inverse' à False
+
+
 
     def transpose(self):
         """
@@ -90,9 +99,11 @@ class Matrix:
         """
         Calcule le déterminant de la matrice
         :param: None
-        :return: None
+        :return - False: Quand le calcul de éterminant n'est pas possible (matrice pas carrée).
         Mets dans l'attribut "determinant" le déterminant de la matrice.
         """
+        if self.dim_x != self.dim_y:
+            return False
         self.determinant = np.linalg.det(self.values)
 
     def get_random_values(self, low, high=0):
@@ -108,4 +119,9 @@ class Matrix:
 
 
 if __name__ == "__main__":
-    pass
+    Matr1 = Matrix(3, 3)
+    Matr1.get_determinant()
+    print(Matr1.determinant)
+
+    result = np.allclose(-4, -4.000000000000001)
+    print(result)
