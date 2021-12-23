@@ -74,6 +74,7 @@ class Matrix:
 
 
 
+
     def transpose(self):
         """
         Matrice calculant la transposée de la matrice
@@ -89,11 +90,15 @@ class Matrix:
         :param matrix2: Objet de type Matrix
         :return: result - umpy.ndarray, solution du produit matriciel
         """
+
+
         if self.dim_y != matrix2.dim_x:
             return False   # si produit matriciel pas possible à cause des dimensions -> renvoit False
 
         result = np.dot(self.values, matrix2.values)
         return result
+
+        #return False if self.dim_y != matrix2.dim_x else np.dot(self.values, matrix2.values)
 
     def get_determinant(self):
         """

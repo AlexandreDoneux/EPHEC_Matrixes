@@ -17,10 +17,16 @@ class ExerciceAddSubstr(Exercice):
         self.type_ex = type_ex
 
         self.ex_name = [" l'addition A + B", " la soustraction A - B"]
+
+        """
         if type_ex == 0:
             self.result = self.matrix1.values + self.matrix2.values
         elif type_ex == 1:
             self.result = self.matrix1.values - self.matrix2.values
+        """
+
+        self.result = self.matrix1.values + self.matrix2.values if type_ex == 0 else \
+            self.matrix1.values - self.matrix2.values
 
         self.text = ""
 

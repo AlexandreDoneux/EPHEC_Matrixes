@@ -17,10 +17,16 @@ class ExerciceMultDiv(Exercice):
         self.type_ex = type_ex
 
         self.ex_name = [" la multiplication A . b", " la division A / b"]
+
+        """
         if type_ex == 0:
             self.result = self.matrix.values * self.factor
         elif type_ex == 1:
             self.result = self.matrix.values / self.factor
+            """
+
+        self.result = self.matrix1.values * self.matrix2.values if type_ex == 0 else \
+            self.matrix1.values / self.matrix2.values
 
         self.text = ""
 

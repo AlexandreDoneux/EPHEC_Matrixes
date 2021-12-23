@@ -36,7 +36,7 @@ def affiche_result():
     """
     dict_etud = {}
     try:
-        with open("results.txt", ) as file:
+        with open("results.txt") as file:
             for line in file:
                 # verification de la forme de chaque ligne si j'ai le temps (normalement pas besoin)
                 line = line.strip("\n")
@@ -49,6 +49,8 @@ def affiche_result():
                 else:
                     dict_etud[line[0]] = [int(line[1]), int(line[2])]
                     # on mets à chaque matricule le nombre d'ex réussis et le nombre total d'exercice
+
+                #dict_etud[line[0]] += line[1:] if line[0] in dict_etud.keys() else dict_etud[line[0]] = [int(line[1]), int(line[2])]
 
     except IOError:
         print("Erreur IO")
@@ -63,10 +65,6 @@ def affiche_result():
         all_succeeded += dict_etud[etudiant][0]
         all_total += dict_etud[etudiant][1]
     all_average = (all_succeeded / all_total) * 100  # moyenne totale de tous les étudiants (en %)
-    print(all_average)
-    print(all_succeeded)
-    print(all_total)
-
 
     # Barres horizontales
     pyplot.barh(range(len(averages)), averages, height=0.7, color="yellow", edgecolor="orange", linestyle="solid",
